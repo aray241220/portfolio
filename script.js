@@ -1,3 +1,63 @@
+// ========== THEME TOGGLE ==========
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+
+// Check for saved theme preference or default to system preference
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme) {
+        // Use saved preference
+        if (savedTheme === 'dark') {
+            html.classList.add('dark-mode');
+            themeToggle.querySelector('.theme-icon').textContent = '☀️';
+        } else {
+            html.classList.remove('dark-mode');
+            themeToggle.querySelector('.theme-icon').textContent = '🌙';
+        }
+    } else {
+        // Use system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            html.classList.add('dark-mode');
+            themeToggle.querySelector('.theme-icon').textContent = '☀️';
+        } else {
+            html.classList.remove('dark-mode');
+            themeToggle.querySelector('.theme-icon').textContent = '🌙';
+        }
+    }
+}
+
+// Initialize theme on page load
+initTheme();
+
+// Toggle theme on button click
+themeToggle.addEventListener('click', () => {
+    html.classList.toggle('dark-mode');
+    
+    if (html.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+        themeToggle.querySelector('.theme-icon').textContent = '☀️';
+    } else {
+        localStorage.setItem('theme', 'light');
+        themeToggle.querySelector('.theme-icon').textContent = '🌙';
+    }
+});
+
+// Listen for system theme changes
+if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            if (e.matches) {
+                html.classList.add('dark-mode');
+                themeToggle.querySelector('.theme-icon').textContent = '☀️';
+            } else {
+                html.classList.remove('dark-mode');
+                themeToggle.querySelector('.theme-icon').textContent = '🌙';
+            }
+        }
+    });
+}
+
 // ========== MOBILE MENU TOGGLE ==========
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');

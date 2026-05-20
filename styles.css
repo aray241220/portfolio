@@ -12,6 +12,21 @@
     --transition: all 0.3s ease;
 }
 
+/* Dark Mode Variables */
+html.dark-mode {
+    --dark-bg: #0f172a;
+    --light-bg: #1e293b;
+    --text-dark: #f1f5f9;
+    --text-light: #cbd5e1;
+    --white: #0f172a;
+    --border-color: #334155;
+}
+
+html.dark-mode body {
+    background-color: var(--dark-bg);
+    color: var(--text-dark);
+}
+
 /* ========== GLOBAL STYLES ========== */
 * {
     margin: 0;
@@ -96,6 +111,34 @@ body {
     width: 100%;
 }
 
+/* ========== THEME TOGGLE BUTTON ========== */
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background: var(--light-bg);
+    transform: rotate(20deg);
+}
+
+.theme-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+html.dark-mode .theme-icon {
+    content: '☀️';
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
@@ -116,10 +159,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 60px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: var(--white);
     position: relative;
     overflow: hidden;
+}
+
+html.dark-mode .hero {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
 }
 
 .hero-background {
@@ -152,6 +200,29 @@ body {
     animation: slideUp 0.8s ease-out;
 }
 
+.hero-illustration {
+    position: relative;
+    z-index: 2;
+    width: 250px;
+    height: 300px;
+    animation: slideUp 0.8s ease-out 0.2s both;
+}
+
+.hero-illustration svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.2));
+}
+
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.2));
+    animation: slideUp 0.8s ease-out 0.2s both;
+}
+
 .hero-title {
     font-size: 4rem;
     font-weight: 700;
@@ -178,18 +249,22 @@ body {
 .cta-button {
     display: inline-block;
     padding: 15px 40px;
-    background: var(--white);
-    color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
     text-decoration: none;
     border-radius: 50px;
     font-weight: 600;
     transition: var(--transition);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 .cta-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 /* ========== ABOUT SECTION ========== */
@@ -459,6 +534,14 @@ body {
     color: var(--white);
 }
 
+.contact .section-title {
+    color: var(--white);
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    background-clip: unset;
+}
+
 .contact-subtitle {
     text-align: center;
     font-size: 1.2rem;
@@ -572,7 +655,260 @@ body {
     }
 }
 
-/* ========== RESPONSIVE DESIGN ========== */
+/* Animated Girl SVG */
+.animated-head {
+    animation: headBob 2s ease-in-out infinite;
+}
+
+.animated-hair {
+    animation: hairFlip 3s ease-in-out infinite;
+}
+
+.hair-strand {
+    animation: hairFlip 3s ease-in-out infinite;
+}
+
+.animated-eye {
+    animation: blink 3s ease-in-out infinite;
+}
+
+.eye-shine {
+    animation: shine 2s ease-in-out infinite;
+}
+
+.animated-body {
+    animation: bodyWave 2.5s ease-in-out infinite;
+}
+
+.animated-arms {
+    animation: armWave 2s ease-in-out infinite;
+}
+
+.animated-hand {
+    animation: handGesture 2s ease-in-out infinite;
+}
+
+.animated-legs {
+    animation: legSway 2.5s ease-in-out infinite;
+}
+
+.float-bubble {
+    animation: bubbleFloat 3s ease-in-out infinite;
+}
+
+@keyframes headBob {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes hairFlip {
+    0%, 100% {
+        transform: scaleX(1);
+    }
+    50% {
+        transform: scaleX(-1);
+    }
+}
+
+@keyframes blink {
+    0%, 85%, 100% {
+        r: 3;
+    }
+    90% {
+        r: 0.5;
+    }
+}
+
+@keyframes shine {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes bodyWave {
+    0%, 100% {
+        transform: translateY(0) scaleY(1);
+    }
+    50% {
+        transform: translateY(-3px) scaleY(1.02);
+    }
+}
+
+@keyframes armWave {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(10deg);
+    }
+}
+
+@keyframes handGesture {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-5px) scale(1.1);
+    }
+}
+
+@keyframes legSway {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(2px);
+    }
+}
+
+@keyframes bubbleFloat {
+    0%, 100% {
+        transform: translateY(0);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translateY(-20px);
+        opacity: 0.8;
+    }
+}
+/* ========== DARK MODE STYLES ========== */
+html.dark-mode .navbar {
+    background: var(--dark-bg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+html.dark-mode .nav-link {
+    color: var(--text-dark);
+}
+
+html.dark-mode .nav-link:hover {
+    color: var(--primary-color);
+}
+
+html.dark-mode .about {
+    background: var(--dark-bg);
+}
+
+html.dark-mode .about-text {
+    color: var(--text-light);
+}
+
+html.dark-mode .stat-item {
+    background: var(--light-bg);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+html.dark-mode .stat-item:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+html.dark-mode .education {
+    background: var(--dark-bg);
+}
+
+html.dark-mode .education-card {
+    background: var(--light-bg);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+html.dark-mode .education-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+html.dark-mode .education-card h3 {
+    color: var(--text-dark);
+}
+
+html.dark-mode .institution {
+    color: #a8d8ea;
+}
+
+html.dark-mode .university,
+html.dark-mode .gpa,
+html.dark-mode .specialization,
+html.dark-mode .score {
+    color: var(--text-light);
+}
+
+html.dark-mode .skills {
+    background: var(--dark-bg);
+}
+
+html.dark-mode .skill-category {
+    background: var(--light-bg);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+html.dark-mode .skill-category:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+html.dark-mode .projects {
+    background: var(--dark-bg);
+}
+
+html.dark-mode .project-card {
+    background: var(--light-bg);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+html.dark-mode .project-card:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+html.dark-mode .project-card h3 {
+    color: var(--text-dark);
+}
+
+html.dark-mode .project-description {
+    color: var(--text-light);
+}
+
+html.dark-mode .tech-badge {
+    background: var(--dark-bg);
+    color: #a8d8ea;
+    border-color: #a8d8ea;
+}
+
+html.dark-mode .tech-badge:hover {
+    background: #a8d8ea;
+    color: var(--dark-bg);
+}
+
+html.dark-mode .contact {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+}
+
+html.dark-mode .contact-form input,
+html.dark-mode .contact-form textarea {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-dark);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+html.dark-mode .contact-form input::placeholder,
+html.dark-mode .contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+html.dark-mode .submit-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--white);
+}
+
+html.dark-mode .footer {
+    background: #000;
+}
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
@@ -591,6 +927,10 @@ body {
         gap: 0;
     }
 
+    html.dark-mode .nav-menu {
+        background: var(--light-bg);
+    }
+
     .nav-menu.active {
         left: 0;
     }
@@ -598,6 +938,11 @@ body {
     .nav-link {
         padding: 1.5rem;
         width: 100%;
+    }
+
+    .hero {
+        flex-direction: column;
+        gap: 30px;
     }
 
     .hero-title {
@@ -610,6 +955,11 @@ body {
 
     .hero-description {
         font-size: 1rem;
+    }
+
+    .hero-illustration {
+        width: 200px;
+        height: 250px;
     }
 
     .section-title {
